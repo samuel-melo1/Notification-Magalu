@@ -22,7 +22,7 @@ public class Notification {
     @JoinColumn(name = "status_id")
     private Status status;
     public Notification() {}
-    public Notification(Long notificationId, LocalDateTime dateTime, String destination, String message, Channel channel, Status status) {
+    public Notification(LocalDateTime dateTime, String destination, String message, Channel channel, Status status) {
         this.notificationId = notificationId;
         this.dateTime = dateTime;
         this.destination = destination;

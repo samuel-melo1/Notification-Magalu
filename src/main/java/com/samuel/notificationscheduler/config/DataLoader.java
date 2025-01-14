@@ -2,6 +2,7 @@ package com.samuel.notificationscheduler.config;
 
 import com.samuel.notificationscheduler.entity.Channel;
 import com.samuel.notificationscheduler.enums.ChannelEnum;
+import com.samuel.notificationscheduler.enums.StatusEnum;
 import com.samuel.notificationscheduler.repository.ChannelRepository;
 import com.samuel.notificationscheduler.repository.StatusRepository;
 import org.springframework.boot.CommandLineRunner;
@@ -22,5 +23,9 @@ public class DataLoader implements CommandLineRunner {
         Arrays.stream(ChannelEnum.values())
                 .map(ChannelEnum::toChannel)
                 .forEach(channelRepository::save);
+
+        Arrays.stream(StatusEnum.values())
+                .map(StatusEnum::toStatus)
+                .forEach(statusRepository::save);
     }
 }
