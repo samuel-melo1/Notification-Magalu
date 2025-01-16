@@ -3,7 +3,9 @@ package com.samuel.notificationscheduler.service;
 import com.samuel.notificationscheduler.controller.dto.ScheduleNotificationDto;
 import com.samuel.notificationscheduler.entity.Notification;
 import com.samuel.notificationscheduler.enums.StatusEnum;
+import com.samuel.notificationscheduler.rabbitmq.RabbitMQConstantes;
 import com.samuel.notificationscheduler.repository.NotificationRepository;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -14,10 +16,12 @@ import java.util.function.Consumer;
 @Service
 public class NotificationService {
 
-    private NotificationRepository repository;
+    private final NotificationRepository repository;
+    private final RabbitTemplate rabbitTemplate;
 
-    public NotificationService(NotificationRepository repository) {
+    public NotificationService(NotificationRepository repository, RabbitTemplate rabbitTemplate) {
         this.repository = repository;
+        this.rabbitTemplate = rabbitTemplate;
     }
 
     public void scheduleNotification(ScheduleNotificationDto dto){
@@ -35,7 +39,6 @@ public class NotificationService {
            repository.save(notification.get());
        }
     }
-
     public void checkAndSend(LocalDateTime dateTime){
        var notifications = repository.findByStatusInAndDateTimeBefore(List.of(
                StatusEnum.PENDENTE.toStatus(), StatusEnum.ERROR.toStatus()), dateTime);
@@ -43,12 +46,11 @@ public class NotificationService {
        notifications.forEach(sendNotification());
     }
 
-    private  Consumer<Notification> sendNotification() {
-        return n -> {
-            // Realizar o envio da notificação
-
-            n.setStatus(StatusEnum.SUCCESS.toStatus());
-            repository.save(n);
+    private Consumer<Notification> sendNotification() {
+        return notification -> {
+            rabbitTemplate.convertAndSend(RabbitMQConstantes.EXG_NAME_NOTIFICATION, RabbitMQConstantes.RK_NOTIFICATION_LOG, notification);
+            notification.setStatus(StatusEnum.SUCCESS.toStatus());
+            repository.save(notification);
         };
     }
 }
