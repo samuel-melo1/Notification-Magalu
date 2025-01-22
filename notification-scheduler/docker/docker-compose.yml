@@ -1,0 +1,23 @@
+services:
+  postgres:
+    image: postgres:17-alpine
+    environment:
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=magaludb
+    ports:
+      - "5432:5432"
+  rabbitmq:
+    container_name: 'rabbitmq-notification'
+    image: 'rabbitmq:3-management'
+    volumes:
+      - ~/.docker-conf/rabbitmq/data/:/var/lib/rabbitmq/
+      - ~/.docker-conf/rabbitmq/log/:/var/log/rabbitmq
+    networks:
+      - rabbitmq_notification
+    ports:
+      - 5672:5672
+      - 15672:15672
+networks:
+  rabbitmq_notification:
+    driver: bridge

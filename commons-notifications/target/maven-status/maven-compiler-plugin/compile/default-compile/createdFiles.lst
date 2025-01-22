@@ -1,0 +1,4 @@
+config\RabbitMQConstantes.class
+entity\Status.class
+entity\Channel.class
+entity\Notification.class
