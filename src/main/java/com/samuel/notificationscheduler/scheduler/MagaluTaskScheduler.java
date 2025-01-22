@@ -22,6 +22,6 @@ public class MagaluTaskScheduler {
     public void checkTasks(){
         var dateTime = LocalDateTime.now();
         logger.info("Running at {}", dateTime);
-        notificationService.sendPendingNotifications(dateTime);
+        notificationService.checkAndSend(dateTime);
     }
 }
