@@ -31,7 +31,6 @@ public class EmailServiceImpl implements EmailService {
     }
     private SimpleMailMessage createMailMessage(Notification notification){
         SimpleMailMessage mailMessage = new SimpleMailMessage();
-
         mailMessage.setFrom(sender);
         mailMessage.setTo(notification.getDestination());
         mailMessage.setText(notification.getMessage());

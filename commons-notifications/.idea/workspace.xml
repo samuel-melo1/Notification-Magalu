@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6d5277a4-a31b-4530-8b8c-0ecc766b61d9" name="Changes" comment="" />
+    <list default="true" id="6d5277a4-a31b-4530-8b8c-0ecc766b61d9" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../notification-sender/src/main/java/com/samuel/notificationsender/service/EmailServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/../notification-sender/src/main/java/com/samuel/notificationsender/service/EmailServiceImpl.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -20,7 +22,7 @@
     </option>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="ProjectColorInfo">{
   &quot;customColor&quot;: &quot;&quot;,
@@ -39,7 +41,7 @@
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
     "git-widget-placeholder": "master",
-    "last_opened_file_path": "C:/Users/Samuel/Documents/commons-notifications",
+    "last_opened_file_path": "C:/Users/Samuel/Documents/notification-project/notification-scheduler",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -61,6 +63,7 @@
       <workItem from="1737506320737" duration="41000" />
       <workItem from="1737506378870" duration="25000" />
       <workItem from="1737506621036" duration="2295000" />
+      <workItem from="1737513552553" duration="132000" />
     </task>
     <servers />
   </component>
