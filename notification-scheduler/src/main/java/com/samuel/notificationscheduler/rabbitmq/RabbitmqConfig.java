@@ -17,12 +17,14 @@ import static config.RabbitMQConstantes.*;
 public class RabbitmqConfig {
     @Bean
     public Queue queue(){
-        return new Queue(QUEUE_NOTIFICATION_LOG, false, false, false);
+        return new Queue(QUEUE_NOTIFICATION_LOG, true, false, false);
     }
+
     @Bean
     public DirectExchange directExchange(){
-        return new DirectExchange(EXG_NAME_NOTIFICATION, false, false);
+        return new DirectExchange(EXG_NAME_NOTIFICATION, true, false);
     }
+
     @Bean
     public Binding binding(){
         return BindingBuilder
@@ -30,10 +32,12 @@ public class RabbitmqConfig {
                 .to(directExchange())
                 .with(RK_NOTIFICATION_LOG);
     }
+
     @Bean
     public MessageConverter jsonMessageConverter() {
         return new Jackson2JsonMessageConverter();
     }
+
     @Bean
     public RabbitTemplate rabbitTemplate(ConnectionFactory connectionFactory) {
         RabbitTemplate rabbitTemplate = new RabbitTemplate(connectionFactory);

@@ -1,7 +1,6 @@
 package com.samuel.notificationsender.service;
 
-import com.samuel.notificationsender.entity.Email;
-import com.samuel.notificationsender.interfaces.EmailService;
+import com.samuel.notificationsender.interfaces.SenderService;
 import entity.Notification;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,16 +11,17 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
 @Service
-public class EmailServiceImpl implements EmailService {
+public class EmailServiceImpl implements SenderService {
 
     @Autowired
     private JavaMailSender javaMailSender;
+
     @Value("${spring.mail.username}")
     private String sender;
 
     private static final Logger logger = LoggerFactory.getLogger(EmailServiceImpl.class);
     @Override
-    public void sendSimpleMail(Notification notification) {
+    public void send(Notification notification) {
         try {
             javaMailSender.send(createMailMessage(notification));
         }
@@ -29,6 +29,7 @@ public class EmailServiceImpl implements EmailService {
             logError(e);
         }
     }
+
     private SimpleMailMessage createMailMessage(Notification notification){
         SimpleMailMessage mailMessage = new SimpleMailMessage();
         mailMessage.setFrom(sender);

@@ -14,12 +14,14 @@ import java.util.Arrays;
 public class DataLoader implements CommandLineRunner {
     private final ChannelRepository channelRepository;
     private final StatusRepository statusRepository;
+
     public DataLoader(ChannelRepository channelRepository, StatusRepository statusRepository) {
         this.channelRepository = channelRepository;
         this.statusRepository = statusRepository;
     }
     @Override
     public void run(String... args) throws Exception {
+
         Arrays.stream(ChannelEnum.values())
                 .map(ChannelEnum::toChannel)
                 .forEach(channelRepository::save);

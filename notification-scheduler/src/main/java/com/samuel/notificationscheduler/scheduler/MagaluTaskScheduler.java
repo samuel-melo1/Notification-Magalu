@@ -11,13 +11,13 @@ import java.util.concurrent.TimeUnit;
 
 @Component
 public class MagaluTaskScheduler {
-
     private static final Logger logger = LoggerFactory.getLogger(MagaluTaskScheduler.class);
     private final NotificationService notificationService;
 
     public MagaluTaskScheduler(NotificationService notificationService){
         this.notificationService = notificationService;
     }
+
     @Scheduled(fixedDelay = 1, timeUnit = TimeUnit.MINUTES)
     public void checkTasks(){
         var dateTime = LocalDateTime.now();
