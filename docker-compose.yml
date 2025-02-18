@@ -1,0 +1,66 @@
+services:
+  rabbitmq:
+    container_name: 'rabbitmq-notification'
+    image: 'rabbitmq:3-management'
+    environment:
+      - 'RABBITMQ_DEFAULT_USER=guest'
+      - 'RABBITMQ_DEFAULT_PASS=guest'
+    networks:
+      - notification-project
+    ports:
+      - 5672:5672
+      - 15672:15672
+
+  local-postgres-compose:
+    image: postgres
+    environment: 
+      - 'POSTGRES_DB=magaludb'
+      - 'POSTGRES_PASSWORD=postgres'
+      - 'POSTGRES_USER=postgres'
+    ports: 
+      - "5432:5432"
+    networks:
+      - notification-project
+  notification-scheduler:
+    image: samuuell/notification-scheduler:1.0.0
+    ports:
+      - "8080:8080"
+    depends_on:
+      - local-postgres-compose
+    environment:
+      - PORT=8080
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://local-postgres-compose:5432/magaludb
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=postgres
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+      - SPRING_RABBITMQ_HOST=rabbitmq-notification
+      - SPRING_RABBITMQ_PORT=5672
+      - SPRING_RABBITMQ_USERNAME=guest
+      - SPRING_RABBITMQ_PASSWORD=guest
+    networks:
+      - notification-project
+
+  notification-sender:
+    image: samuuell/notification-sender:1.0.0
+    ports:
+      - "8084:8084"
+    depends_on:
+      - notification-scheduler
+    environment:
+      - PORT=8084
+      - SPRING_MAIL_HOST=smtp.gmail.com
+      - SPRING_MAIL_PORT=587
+      - SPRING_MAIL_USERNAME=samuelprogramacao3@gmail.com
+      - SPRING_MAIL_PASSWORD=mkhn xkhm uutp yjnc
+      - SPRING.MAIL.PROPERTIES.MAIL.SMTP.STARTTLS.REQUIRED=TRUE 
+      - SPRING_RABBITMQ_HOST=rabbitmq-notification
+      - SPRING_RABBITMQ_PORT=5672
+      - SPRING_RABBITMQ_USERNAME=guest
+      - SPRING_RABBITMQ_PASSWORD=guest
+    networks:
+      - notification-project
+
+networks:
+  notification-project:
+    driver: bridge
+    
