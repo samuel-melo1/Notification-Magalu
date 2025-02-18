@@ -28,6 +28,8 @@
     </scm>
     <properties>
         <java.version>17</java.version>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
     </properties>
     <dependencies>
         <dependency>
@@ -42,7 +44,7 @@
         <dependency>
             <groupId>br.com.samuel</groupId>
             <artifactId>commons-notification</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <version>1.3</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>

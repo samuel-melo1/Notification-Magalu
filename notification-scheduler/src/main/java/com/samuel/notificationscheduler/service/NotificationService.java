@@ -26,14 +26,9 @@ public class NotificationService {
         this.repository = repository;
         this.rabbitTemplate = rabbitTemplate;
     }
-
     public void saveScheduleNotification(ScheduleNotificationDto dto){
         repository.save(dto.toNotification());
     }
-    public Optional<Notification> findById(Long notificationId){
-        return repository.findById(notificationId);
-    }
-
     public void cancelNotification(Long notificationId){
        var notification = findById(notificationId);
 
@@ -41,6 +36,9 @@ public class NotificationService {
            notification.get().setStatus(StatusEnum.CANCELED.toStatus());
            repository.save(notification.get());
        }
+    }
+    public Optional<Notification> findById(Long notificationId){
+        return repository.findById(notificationId);
     }
     public void sendPendingNotifications(LocalDateTime dateTime){
        var notifications = repository.findByStatusInAndDateTimeBefore(Arrays.asList(

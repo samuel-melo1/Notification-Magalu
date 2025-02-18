@@ -6,11 +6,12 @@
 
     <groupId>br.com.samuel</groupId>
     <artifactId>commons-notification</artifactId>
-    <version>1.1-SNAPSHOT</version>
+    <version>1.4</version>
 
     <properties>
-        <maven.compiler.source>19</maven.compiler.source>
-        <maven.compiler.target>19</maven.compiler.target>
+        <java.version>17</java.version>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 

@@ -1,0 +1,21 @@
+server:
+  port: ${PORT:8080}
+spring:
+  application:
+    name: notification-scheduler
+  rabbitmq:
+    password: guest
+    username: guest
+    host: localhost
+    port: 5672
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/
+    username: postgres
+    password: postgres
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: update

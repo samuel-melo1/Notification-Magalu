@@ -18,7 +18,6 @@ public class EmailServiceImpl implements SenderService {
 
     @Value("${spring.mail.username}")
     private String sender;
-
     private static final Logger logger = LoggerFactory.getLogger(EmailServiceImpl.class);
     @Override
     public void send(Notification notification) {
@@ -29,13 +28,12 @@ public class EmailServiceImpl implements SenderService {
             logError(e);
         }
     }
-
     private SimpleMailMessage createMailMessage(Notification notification){
         SimpleMailMessage mailMessage = new SimpleMailMessage();
         mailMessage.setFrom(sender);
         mailMessage.setTo(notification.getDestination());
         mailMessage.setText(notification.getMessage());
-        mailMessage.setSubject("Email Validation!");
+        mailMessage.setSubject("Email Notification!");
         return mailMessage;
     }
     private void logError(Exception e){

@@ -20,4 +20,12 @@ public class Channel {
     public void setDescription(String description) {
         this.description = description;
     }
+
+    @Override
+    public String toString() {
+        return "Channel{" +
+                "channelId=" + channelId +
+                ", description='" + description + '\'' +
+                '}';
+    }
 }

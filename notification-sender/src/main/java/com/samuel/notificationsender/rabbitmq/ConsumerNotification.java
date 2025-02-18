@@ -1,6 +1,5 @@
 package com.samuel.notificationsender.rabbitmq;
 
-import com.samuel.notificationsender.interfaces.SenderService;
 import com.samuel.notificationsender.service.NotificationService;
 import entity.Notification;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
